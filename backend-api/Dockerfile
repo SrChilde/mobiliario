@@ -1,15 +1,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+WORKDIR /src
 
-# Copiar archivos del proyecto y restaurar
-COPY *.csproj ./
-RUN dotnet restore
+# Copiamos el archivo del proyecto específicamente
+COPY ["backend-api.csproj", "./"]
+RUN dotnet restore "backend-api.csproj"
 
-# Copiar todo y publicar
-COPY . ./
-RUN dotnet publish -c Release -o out
+# Copiamos el resto de los archivos
+COPY . .
+RUN dotnet publish "backend-api.csproj" -c Release -o /app/out
 
-# Imagen de ejecución
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app/out .
