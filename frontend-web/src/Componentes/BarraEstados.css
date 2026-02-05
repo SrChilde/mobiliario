@@ -1,0 +1,45 @@
+@keyframes slideIn {
+  from { transform: translateY(-8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.barra-estados {
+  margin: 16px 0;
+  padding: 16px;
+  border: 2px solid var(--barra-border, var(--primary-blue));
+  border-radius: 6px;
+  background-color: var(--barra-bg, #e7f3ff);
+  color: var(--barra-text, var(--dark-blue));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  animation: slideIn 0.3s ease;
+}
+
+.barra-estados__type {
+  font-weight: 700;
+}
+
+.barra-estados__text {
+  flex: 1;
+  margin-left: 12px;
+}
+
+.barra-estados__close {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 8px;
+  font-weight: bold;
+  transition: opacity 0.2s ease;
+}
+.barra-estados__close:hover { opacity: 0.6; }
+
+/* Type variants using CSS variables for colors */
+.barra-estados--success { --barra-bg: #d4edda; --barra-border: #28a745; --barra-text: #155724; }
+.barra-estados--error   { --barra-bg: #f8d7da; --barra-border: #dc3545; --barra-text: #721c24; }
+.barra-estados--warning { --barra-bg: #fff3cd; --barra-border: #ffc107; --barra-text: #856404; }
+.barra-estados--info    { --barra-bg: #e7f3ff; --barra-border: var(--primary-blue); --barra-text: var(--dark-blue); }

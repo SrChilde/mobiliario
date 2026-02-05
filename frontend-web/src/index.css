@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --primary-blue: #0056b3;
+  --dark-blue: #003a75;
+  --light-blue: #e8f4ff;
+  --white: #ffffff;
+  --border-gray: #dfe7ef;
+  --dark-gray: #5b6b78;
+  --medium-gray: #9aa7b3;
+  --error: #dc3545;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(180deg, #eaf6ff 0%, #d7eeff 100%);
+  color: #0b2b45;
+}
+
+.app-container {
+  max-width: 1024px;
+  margin: 32px auto;
+  padding: 24px;
+}
+
+.page-title {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  font-size: 32px;
+  color: var(--dark-blue);
+  margin: 0 0 18px 0;
+  letter-spacing: 0.6px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.tarjetas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 18px;
+  margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+  .tarjetas-grid {
+    grid-template-columns: 1fr;
+  }
+  .app-container {
+    padding: 16px;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

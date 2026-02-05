@@ -1,0 +1,93 @@
+.tarjeta {
+  background-color: var(--white);
+  border-left: 4px solid var(--border-gray);
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 6px 18px rgba(11, 43, 69, 0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(11, 43, 69, 0.12);
+}
+
+.tarjeta__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.tarjeta__title {
+  color: var(--primary-blue);
+  margin: 0;
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tarjeta__codigo {
+  color: var(--medium-gray);
+  font-size: 12px;
+  margin: 2px 0 8px 0;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tarjeta__desc {
+  color: var(--dark-gray);
+  margin: 6px 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.tarjeta__estado {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tarjeta__estado--disponible {
+  background-color: #e6fbec;
+  color: #127233;
+  border-left-color: #127233;
+}
+
+.tarjeta__estado--asignado {
+  background-color: #e8f3ff;
+  color: #0b66c3;
+  border-left-color: #0b66c3;
+}
+
+.tarjeta__estado--dañado {
+  background-color: #fff0f0;
+  color: #b02a37;
+  border-left-color: #b02a37;
+}
+
+.tarjeta__estado--en-proceso {
+  background-color: #fff9e6;
+  color: #8a6d00;
+  border-left-color: #8a6d00;
+}
+
+.tarjeta__edit {
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.tarjeta__edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,86,179,0.18);
+}
