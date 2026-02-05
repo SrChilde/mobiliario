@@ -31,3 +31,4 @@ C:\Users\Kenny\Documents\2026\PortalesWebII\REACT\mobiliario\backend-api\obj\Deb
 C:\Users\Kenny\Documents\2026\PortalesWebII\REACT\mobiliario\backend-api\obj\Debug\net10.0\backend-api.pdb
 C:\Users\Kenny\Documents\2026\PortalesWebII\REACT\mobiliario\backend-api\obj\Debug\net10.0\backend-api.genruntimeconfig.cache
 C:\Users\Kenny\Documents\2026\PortalesWebII\REACT\mobiliario\backend-api\obj\Debug\net10.0\ref\backend-api.dll
+C:\Users\Kenny\Documents\2026\PortalesWebII\REACT\mobiliario\backend-api\obj\Debug\net10.0\backend-api.sourcelink.json

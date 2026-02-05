@@ -1,21 +1,23 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 1. Configurar el puerto para Render (Vital)
+var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
+builder.WebHost.UseUrls($"http://*:{port}");
+
+// 2. Servicios base
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-// Use native OpenAPI support for .NET 10
-builder.Services.AddOpenApi();
 
-// CORS - allow frontend during development (adjust origins as needed)
+// 3. CORS (Mantenemos tu política pero le cambiamos el nombre a algo más general)
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        // During development allow any origin to simplify testing (change in production)
         policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
@@ -24,17 +26,18 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// 4. Configuración del pipeline (Quitamos Redirection para Render)
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-
-app.UseCors("AllowLocalhost");
+// 5. ORDEN CRÍTICO: CORS siempre antes que Controllers
+app.UseCors("AllowAll");
 
 app.MapControllers();
+
+// Ruta de salud rápida
+app.MapGet("/", () => "Nuevo Backend Funcionando");
 
 app.Run();
