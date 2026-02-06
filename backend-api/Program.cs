@@ -38,12 +38,13 @@ app.UseCors("AllowAll");
 // 6. Servir archivos estáticos del frontend compilado
 app.UseStaticFiles();
 
+// 7. Rutas de API
 app.MapControllers();
 
-// 7. Ruta de salud rápida
+// 8. Ruta de salud rápida
 app.MapGet("/api/health", () => "Backend Funcionando");
 
-// 8. Fallback a index.html para Client-Side Routing de React
+// 9. Fallback a index.html para Client-Side Routing de React (DEBE SER LO ÚLTIMO)
 app.MapFallbackToFile("index.html");
 
 app.Run();

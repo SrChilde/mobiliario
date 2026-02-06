@@ -43,7 +43,7 @@ function Inicio() {
     try {
       setGuardando(true);
       await crearMobiliario(payload);
-      showToast("success", "Mueble creado con éxito ✅");
+      showToast("Éxito", "Item creado con éxito ✅");
       cargar();
       return true;
     } catch (e) {
