@@ -63,7 +63,7 @@ function Inicio() {
     try {
       setActualizando(true);
       await actualizarMobiliario(seleccionado.id, payload);
-      showToast("success", "Mueble actualizado ✅");
+      showToast("Éxito", "Item actualizado ✅");
       setEditOpen(false);
       setSeleccionado(null);
       cargar();
