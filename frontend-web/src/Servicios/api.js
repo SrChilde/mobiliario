@@ -1,5 +1,5 @@
-// Reemplaza con la URL que te de Render para el nuevo backend
-const BASE_URL = "https://mobiliariobackend.onrender.com";
+// Agregamos /api/mobiliario al final de la URL
+const BASE_URL = "https://mobiliariobackend.onrender.com/api/mobiliario";
 
 export async function getMobiliario() {
   try {
@@ -12,7 +12,9 @@ export async function getMobiliario() {
   }
 }
 
-export async function crearMueble(payload) {
+// Cambiamos el nombre de 'crearMueble' a 'crearMobiliario' 
+// para que coincida con tu importación en el componente
+export async function crearMobiliario(payload) {
   const res = await fetch(BASE_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
