@@ -1,4 +1,4 @@
-const BASE_URL = "/api/mobiliario";
+const BASE_URL = "https://mobiliariobackend.onrender.com/api/mobiliario";
 
 export async function getMobiliario() {
   try {
