@@ -35,9 +35,15 @@ if (app.Environment.IsDevelopment())
 // 5. ORDEN CRÍTICO: CORS siempre antes que Controllers
 app.UseCors("AllowAll");
 
+// 6. Servir archivos estáticos del frontend compilado
+app.UseStaticFiles();
+
 app.MapControllers();
 
-// Ruta de salud rápida
-app.MapGet("/", () => "Nuevo Backend Funcionando");
+// 7. Ruta de salud rápida
+app.MapGet("/api/health", () => "Backend Funcionando");
+
+// 8. Fallback a index.html para Client-Side Routing de React
+app.MapFallbackToFile("index.html");
 
 app.Run();
