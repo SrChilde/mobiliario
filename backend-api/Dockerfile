@@ -1,27 +1,27 @@
-# STAGE 1: Compilar Frontend
-FROM node:20-alpine AS frontend-build
-WORKDIR /src
-COPY frontend-web/package*.json ./frontend-web/
-RUN cd frontend-web && npm install
-COPY frontend-web ./frontend-web/
-RUN cd frontend-web && npm run build
+# 1. Imagen del SDK para compilar
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
 
-# STAGE 2: Compilar Backend
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS backend-build
-WORKDIR /src
-COPY backend-api/backend-api.csproj ./backend-api/
-RUN cd backend-api && dotnet restore "backend-api.csproj"
+# Copiamos el archivo del proyecto (asumiendo que está en la raíz del repo)
+# Si está dentro de una carpeta, usa: COPY backend-api/*.csproj ./
+COPY *.csproj ./
+RUN dotnet restore
 
-COPY backend-api ./backend-api/
-RUN cd backend-api && dotnet publish "backend-api.csproj" -c Release -o /app/out
+# Copiamos el resto de los archivos y publicamos
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-# STAGE 3: Runtime
+# 2. Imagen de ejecución (Runtime)
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=backend-build /app/out .
-COPY --from=frontend-build /src/frontend-web/build ./wwwroot
 
+# Traemos lo compilado
+COPY --from=build /app/out .
+
+# Configuración de puerto para Render
 ENV ASPNETCORE_URLS=http://+:10000
 EXPOSE 10000
 
+# IMPORTANTE: Verifica que tu archivo se llame backend-api.csproj
+# Si se llama distinto, cambia "backend-api.dll" por el nombre correcto.
 ENTRYPOINT ["dotnet", "backend-api.dll"]
