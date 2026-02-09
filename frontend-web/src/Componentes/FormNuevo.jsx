@@ -6,6 +6,9 @@ function FormNuevo({ onGuardar, loading }) {
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [estado, setEstado] = useState("Disponible");
+  const [ubicacion, setUbicacion] = useState("");
+  const [cantidad, setCantidad] = useState("");
+  const [observaciones, setObservaciones] = useState("");
   const [msg, setMsg] = useState("");
 
   const submit = async (e) => {
@@ -28,6 +31,9 @@ function FormNuevo({ onGuardar, loading }) {
       titulo: titulo.trim(),
       descripcion: descripcion.trim(),
       estado: estado,
+      ubicacion: ubicacion.trim(),
+      cantidad: cantidad,
+      observaciones: observaciones.trim(),
     });
 
     // Si Home devuelve true, limpiamos
@@ -36,6 +42,9 @@ function FormNuevo({ onGuardar, loading }) {
       setTitulo("");
       setDescripcion("");
       setEstado("Disponible");
+      setUbicacion("");
+      setCantidad("");
+      setObservaciones("");
     }
   };
 
@@ -89,6 +98,40 @@ function FormNuevo({ onGuardar, loading }) {
           <option value="En Proceso">En Proceso</option>
         </select>
       </div>
+
+      <div className="form-nuevo__group">
+        <input
+          type="text"
+          placeholder="Ubicación"
+          value={ubicacion}
+          onChange={(e) => setUbicacion(e.target.value)}
+          disabled={loading}
+          className="form-nuevo__input"
+        />
+      </div>
+
+      <div className="form-nuevo__group">
+        <input
+          type="number"
+          placeholder="Cantidad"
+          value={cantidad}
+          onChange={(e) => setCantidad(e.target.value)}
+          disabled={loading}
+          className="form-nuevo__input"
+        />
+      </div>
+
+      <div className="form-nuevo__group">
+        <input
+          type="text"
+          placeholder="Observaciones"
+          value={observaciones}
+          onChange={(e) => setObservaciones(e.target.value)}
+          disabled={loading}
+          className="form-nuevo__input"
+        />
+      </div>
+
 
       <button type="submit" disabled={loading} className="form-nuevo__button">
         {loading ? "Guardando..." : "Guardar"}

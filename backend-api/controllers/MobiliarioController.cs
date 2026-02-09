@@ -9,9 +9,9 @@ public class MobiliarioController : ControllerBase
 {
     private static readonly List<MobiliarioDto> _mobiliario = new()
     {
-        new MobiliarioDto { Id = 1, Codigo = "MOB-001", Titulo = "Mesa de sala", Descripcion = "Mesa de madera redonda pensada para centro de sala", Estado = "Disponible" },
-        new MobiliarioDto { Id = 2, Codigo = "ESC-001", Titulo = "Silla de Oficina", Descripcion = "Silla para oficina negra de 4 patas con soporte para cuello y columna", Estado = "Disponible" },
-        new MobiliarioDto { Id = 3, Codigo = "ARM-001", Titulo = "Armario", Descripcion = "Armario de madera con puertas corredizas", Estado = "Asignado" }
+        new MobiliarioDto { Id = 1, Codigo = "MOB-001", Titulo = "Mesa de sala", Descripcion = "Mesa de madera redonda pensada para centro de sala", Estado = "Disponible", Ubicacion = "Almacen 1", Cantidad = 5, Observaciones = "Ninguna" },
+        new MobiliarioDto { Id = 2, Codigo = "ESC-001", Titulo = "Silla de Oficina", Descripcion = "Silla para oficina negra de 4 patas con soporte para cuello y columna", Estado = "Disponible", Ubicacion = "Almacen 1", Cantidad = 5, Observaciones = "Ninguna" },
+        new MobiliarioDto { Id = 3, Codigo = "ARM-001", Titulo = "Armario", Descripcion = "Armario de madera con puertas corredizas", Estado = "Asignado", Ubicacion = "Almacen 1", Cantidad = 5, Observaciones = "Ninguna" }
     };
 
     // GET: Traer todos los muebles
@@ -27,6 +27,9 @@ public class MobiliarioController : ControllerBase
         public string? Titulo { get; set; }
         public string? Descripcion { get; set; }
         public string? Estado { get; set; }
+        public string? Ubicacion { get; set; }
+        public int? Cantidad { get; set; }
+        public string Observaciones { get; set; }
     }
 
     // POST: Crear nuevo mueble
@@ -36,8 +39,11 @@ public class MobiliarioController : ControllerBase
         if (req == null || string.IsNullOrWhiteSpace(req.Codigo) || 
             string.IsNullOrWhiteSpace(req.Titulo) || 
             string.IsNullOrWhiteSpace(req.Descripcion) ||
-            string.IsNullOrWhiteSpace(req.Estado))
-            return BadRequest("Código, título, descripción y estado son obligatorios.");
+            string.IsNullOrWhiteSpace(req.Estado) ||
+            string.IsNullOrWhiteSpace(req.Ubicacion) ||
+            string.IsNullOrWhiteSpace(req.Cantidad) ||
+            string.IsNullOrWhiteSpace(req.Cantidad))
+            return BadRequest("Todos los campos son obligatorios.");
 
         var estadosValidos = new[] { "Disponible", "Asignado", "Dañado", "En Proceso" };
         if (!estadosValidos.Contains(req.Estado))
@@ -51,7 +57,10 @@ public class MobiliarioController : ControllerBase
             Codigo = req.Codigo.Trim().ToUpper(),
             Titulo = req.Titulo.Trim(),
             Descripcion = req.Descripcion.Trim(),
-            Estado = req.Estado.Trim()
+            Estado = req.Estado.Trim(),
+            Ubicacion = req.Ubicacion.Trim(),
+            Cantidad = req.Cantidad,
+            Observaciones = req.Observaciones.Trim()
         };
 
         _mobiliario.Add(nuevo);
@@ -65,6 +74,9 @@ public class MobiliarioController : ControllerBase
         public string? Titulo { get; set; }
         public string? Descripcion { get; set; }
         public string? Estado { get; set; }
+        public string? Ubicacion { get; set; }
+        public int? Cantidad { get; set; }
+        public string Observaciones { get; set; }
     }
 
     // PUT: Actualizar un mueble existente
@@ -77,7 +89,11 @@ public class MobiliarioController : ControllerBase
         if (req == null || string.IsNullOrWhiteSpace(req.Codigo) || 
             string.IsNullOrWhiteSpace(req.Titulo) || 
             string.IsNullOrWhiteSpace(req.Descripcion) ||
-            string.IsNullOrWhiteSpace(req.Estado))
+            string.IsNullOrWhiteSpace(req.Estado) ||
+            string.IsNullOrWhiteSpace(req.Ubicacion) ||
+            string.IsNullOrWhiteSpace(req.Cantidad) ||
+            string.IsNullOrWhiteSpace(req.Cantidad))
+            return BadRequest("Todos los campos son obligatorios.");
             return BadRequest("Código, título, descripción y estado son obligatorios.");
 
         var estadosValidos = new[] { "Disponible", "Asignado", "Dañado", "En Proceso" };
@@ -88,6 +104,9 @@ public class MobiliarioController : ControllerBase
         existente.Titulo = req.Titulo.Trim();
         existente.Descripcion = req.Descripcion.Trim();
         existente.Estado = req.Estado.Trim();
+        existente.Ubicacion = req.Ubicacion.Trim();
+        existente.Cantidad = req.Cantidad;
+        existente.Observaciones = req.Observaciones.Trim();
 
         return Ok(existente);
     }
@@ -99,5 +118,8 @@ public class MobiliarioController : ControllerBase
         public string Titulo { get; set; } = "";
         public string Descripcion { get; set; } = "";
         public string Estado { get; set; } = "";
+        public string Ubicacion { get; set; } = "";
+        public int Cantidad { get; set; } = "" ;
+        public string Observaciones { get; set; } = "";
     }
 }
