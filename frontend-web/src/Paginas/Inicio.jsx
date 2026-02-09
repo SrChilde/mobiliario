@@ -101,7 +101,6 @@ function Inicio() {
 
       <Buscador value={filtro} onChange={setFiltro} />
 
-      <Buscador value={filtro} onChange={setFiltro} />
 
       <div className="acciones-primarias">
         <button onClick={() => setNuevoModalOpen(true)} className="boton-agregar">
