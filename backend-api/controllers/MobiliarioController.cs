@@ -40,9 +40,8 @@ public class MobiliarioController : ControllerBase
             string.IsNullOrWhiteSpace(req.Titulo) || 
             string.IsNullOrWhiteSpace(req.Descripcion) ||
             string.IsNullOrWhiteSpace(req.Estado) ||
-            string.IsNullOrWhiteSpace(req.Ubicacion) ||
-            string.IsNullOrWhiteSpace(req.Cantidad) ||
-            !req.Cantidad.HasValue)
+            !req.Cantidad.HasValue ||
+            string.IsNullOrWhiteSpace(req.Ubicacion))
             return BadRequest("Todos los campos son obligatorios.");
 
         var estadosValidos = new[] { "Disponible", "Asignado", "Dañado", "En Proceso" };
@@ -60,7 +59,7 @@ public class MobiliarioController : ControllerBase
             Estado = req.Estado.Trim(),
             Ubicacion = req.Ubicacion.Trim(),
             Cantidad = req.Cantidad ?? 0,
-            Observaciones = req.Observaciones.Trim();
+            Observaciones = req.Observaciones.Trim()
         };
 
         _mobiliario.Add(nuevo);
@@ -91,10 +90,9 @@ public class MobiliarioController : ControllerBase
             string.IsNullOrWhiteSpace(req.Descripcion) ||
             string.IsNullOrWhiteSpace(req.Estado) ||
             string.IsNullOrWhiteSpace(req.Ubicacion) ||
-            string.IsNullOrWhiteSpace(req.Cantidad) ||
-            string.IsNullOrWhiteSpace(req.Cantidad))
+            !req.Cantidad.HasValue ||
+            string.IsNullOrWhiteSpace(req.Observaciones))
             return BadRequest("Todos los campos son obligatorios.");
-            return BadRequest("Código, título, descripción y estado son obligatorios.");
 
         var estadosValidos = new[] { "Disponible", "Asignado", "Dañado", "En Proceso" };
         if (!estadosValidos.Contains(req.Estado))
@@ -119,7 +117,7 @@ public class MobiliarioController : ControllerBase
         public string Descripcion { get; set; } = "";
         public string Estado { get; set; } = "";
         public string Ubicacion { get; set; } = "";
-        public int Cantidad { get; set; };
+        public int Cantidad { get; set; }
         public string Observaciones { get; set; } = "";
     }
 }
