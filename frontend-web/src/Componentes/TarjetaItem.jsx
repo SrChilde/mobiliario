@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import './TarjetaItem.css';
 
 function TarjetaItem({ item, onEdit }) {
@@ -11,7 +12,12 @@ function TarjetaItem({ item, onEdit }) {
       </div>
       <p className="tarjeta__codigo">{item.codigo}</p>
       <p className="tarjeta__desc">{item.descripcion}</p>
-      <button className="tarjeta__edit" onClick={() => onEdit(item)}>Editar</button>
+      <div className="tarjeta__actions">
+        <Link to={`/mobiliario/${item.id}`} className="tarjeta__detail">
+          Ver detalle
+        </Link>
+        <button className="tarjeta__edit" onClick={() => onEdit(item)}>Editar</button>
+      </div>
     </div>
   );
 }
