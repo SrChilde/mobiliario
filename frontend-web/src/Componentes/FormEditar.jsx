@@ -17,6 +17,9 @@ function FormEditar({ item, onGuardar, loading }) {
       setTitulo(item.titulo || "");
       setDescripcion(item.descripcion || "");
       setEstado(item.estado || "Disponible");
+      setUbicacion(item.ubicacion || "");
+      setCantidad(item.cantidad || "");
+      setObservaciones(item.observaciones || "");
     }
   }, [item]);
 
@@ -38,6 +41,9 @@ function FormEditar({ item, onGuardar, loading }) {
       titulo: titulo.trim(),
       descripcion: descripcion.trim(),
       estado: estado,
+      ubicacion: ubicacion.trim(),
+      cantidad: parseInt(cantidad) || 0,
+      observaciones: observaciones.trim(),
     });
 
     if (!ok) setMsg("No se pudo actualizar (revisa el error).");
@@ -97,7 +103,7 @@ function FormEditar({ item, onGuardar, loading }) {
         <input
           type="text"
           placeholder="Ubicación"
-          value={item?.ubicacion || ""}
+          value={ubicacion}
           onChange={(e) => setUbicacion(e.target.value)}
           disabled={loading}
           className="form-editar__input"
@@ -108,7 +114,7 @@ function FormEditar({ item, onGuardar, loading }) {
         <input
           type="number"
           placeholder="Cantidad"
-          value={item?.cantidad || ""}
+          value={cantidad}
           onChange={(e) => setCantidad(e.target.value)}
           disabled={loading}
           className="form-editar__input"
@@ -119,7 +125,7 @@ function FormEditar({ item, onGuardar, loading }) {
         <input
           type="text"
           placeholder="Observaciones"
-          value={item?.observaciones || ""}
+          value={observaciones}
           onChange={(e) => setObservaciones(e.target.value)}
           disabled={loading}
           className="form-editar__input"
