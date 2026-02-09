@@ -42,7 +42,7 @@ public class MobiliarioController : ControllerBase
             string.IsNullOrWhiteSpace(req.Estado) ||
             string.IsNullOrWhiteSpace(req.Ubicacion) ||
             string.IsNullOrWhiteSpace(req.Cantidad) ||
-            string.IsNullOrWhiteSpace(req.Cantidad))
+            !req.Cantidad.HasValue)
             return BadRequest("Todos los campos son obligatorios.");
 
         var estadosValidos = new[] { "Disponible", "Asignado", "Dañado", "En Proceso" };
@@ -59,8 +59,8 @@ public class MobiliarioController : ControllerBase
             Descripcion = req.Descripcion.Trim(),
             Estado = req.Estado.Trim(),
             Ubicacion = req.Ubicacion.Trim(),
-            Cantidad = req.Cantidad,
-            Observaciones = req.Observaciones.Trim()
+            Cantidad = req.Cantidad ?? 0,
+            Observaciones = req.Observaciones.Trim();
         };
 
         _mobiliario.Add(nuevo);
@@ -105,7 +105,7 @@ public class MobiliarioController : ControllerBase
         existente.Descripcion = req.Descripcion.Trim();
         existente.Estado = req.Estado.Trim();
         existente.Ubicacion = req.Ubicacion.Trim();
-        existente.Cantidad = req.Cantidad;
+        existente.Cantidad = req.Cantidad ?? 0;
         existente.Observaciones = req.Observaciones.Trim();
 
         return Ok(existente);
@@ -119,7 +119,7 @@ public class MobiliarioController : ControllerBase
         public string Descripcion { get; set; } = "";
         public string Estado { get; set; } = "";
         public string Ubicacion { get; set; } = "";
-        public int Cantidad { get; set; } = "" ;
+        public int Cantidad { get; set; };
         public string Observaciones { get; set; } = "";
     }
 }
