@@ -61,6 +61,60 @@
   transform: translateY(0);
 }
 
+/* Contenedor principal */
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: #f8f9fa; /* Un gris muy suave de fondo */
+  border-radius: 12px;
+}
+
+/* Estilo de los botones */
+.paginacion__btn {
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #dee2e6;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+}
+
+/* Efecto al pasar el mouse */
+.paginacion__btn:hover:not(:disabled) {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+  transform: translateY(-1px);
+}
+
+/* Cuando el botón está desactivado */
+.paginacion__btn:disabled {
+  background-color: #f1f3f5;
+  color: #adb5bd;
+  cursor: not-allowed;
+  border-color: #e9ecef;
+}
+
+/* Texto de "Página X de Y" */
+.paginacion__info {
+  font-size: 0.95rem;
+  color: #495057;
+  font-weight: 600;
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

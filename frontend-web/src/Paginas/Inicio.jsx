@@ -132,27 +132,26 @@ function Inicio() {
       </div>
 
       <div className="paginacion">
-    <button 
-      disabled={paginaActual === 1} 
-      onClick={() => setPaginaActual(paginaActual - 1)}
-      className="paginacion__btn"
-    >
-      Anterior
-    </button>
-        
-    <span className="paginacion__info">
-      Página {paginaActual} de {totalPaginas}
-    </span>
-        
-    <button 
-      disabled={paginaActual === totalPaginas || totalPaginas === 0} 
-      onClick={() => setPaginaActual(paginaActual + 1)}
-      className="paginacion__btn"
-    >
-      Siguiente
-    </button>
-  </div>
-
+      <button 
+        disabled={paginaActual === 1} 
+        onClick={() => setPaginaActual(paginaActual - 1)}
+        className="paginacion__btn"
+      >
+        ← Anterior
+      </button>
+            
+      <span className="paginacion__info">
+        {paginaActual} / {totalPaginas}
+      </span>
+            
+      <button 
+        disabled={paginaActual === totalPaginas || totalPaginas === 0} 
+        onClick={() => setPaginaActual(paginaActual + 1)}
+        className="paginacion__btn"
+      >
+        Siguiente →
+      </button>
+    </div>
       <Modal
         open={nuevoModalOpen}
         title="Registrar Nuevo Mobiliario"
