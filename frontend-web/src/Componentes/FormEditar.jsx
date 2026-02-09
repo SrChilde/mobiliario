@@ -6,6 +6,9 @@ function FormEditar({ item, onGuardar, loading }) {
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [estado, setEstado] = useState("Disponible");
+  const [ubicacion, setUbicacion] = useState("");
+  const [cantidad, setCantidad] = useState("");
+  const [observaciones, setObservaciones] = useState("");
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
@@ -88,6 +91,39 @@ function FormEditar({ item, onGuardar, loading }) {
           <option value="Dañado">Dañado</option>
           <option value="En Proceso">En Proceso</option>
         </select>
+      </div>
+
+      <div className="form-editar__group">
+        <input
+          type="text"
+          placeholder="Ubicación"
+          value={item?.ubicacion || ""}
+          onChange={(e) => setUbicacion(e.target.value)}
+          disabled={loading}
+          className="form-editar__input"
+        />
+      </div>
+
+      <div className="form-editar__group">
+        <input
+          type="number"
+          placeholder="Cantidad"
+          value={item?.cantidad || ""}
+          onChange={(e) => setCantidad(e.target.value)}
+          disabled={loading}
+          className="form-editar__input"
+        />
+      </div>
+
+      <div className="form-editar__group">
+        <input
+          type="text"
+          placeholder="Observaciones"
+          value={item?.observaciones || ""}
+          onChange={(e) => setObservaciones(e.target.value)}
+          disabled={loading}
+          className="form-editar__input"
+        />
       </div>
 
       <button type="submit" disabled={loading} className="form-editar__button">
