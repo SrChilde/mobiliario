@@ -22,6 +22,28 @@ function Inicio() {
 
   const [toast, setToast] = useState({ type: "", text: "" });
 
+  const [paginaActual, setPaginaActual] = useState(1);
+  const itemsPorPagina = 6;
+
+  const filtrados = mobiliario.filter((item) =>
+    (item.codigo + " " + item.titulo + " " + item.descripcion)
+      .toLowerCase()
+      .includes(filtro.toLowerCase())
+  );
+
+  // 2. DESPUÉS definimos la lógica de paginación usando 'filtrados'
+  const totalPaginas = Math.ceil(filtrados.length / itemsPorPagina);
+  const indiceUltimoItem = paginaActual * itemsPorPagina;
+  const indicePrimerItem = indiceUltimoItem - itemsPorPagina;
+  
+  // Extraemos la porción de la lista para la página actual
+  const itemsPaginados = filtrados.slice(indicePrimerItem, indiceUltimoItem);
+
+  // 3. AGREGAMOS este useEffect para resetear la página al buscar
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [filtro]);
+
   const showToast = (type, text) => {
     setToast({ type, text });
     setTimeout(() => setToast({ type: "", text: "" }), 3000);
@@ -81,11 +103,6 @@ function Inicio() {
     }
   };
 
-  const filtrados = mobiliario.filter((item) =>
-    (item.codigo + " " + item.titulo + " " + item.descripcion)
-      .toLowerCase()
-      .includes(filtro.toLowerCase())
-  );
 
   if (loading) return <Cargando />;
 
@@ -110,10 +127,32 @@ function Inicio() {
       {filtrados.length === 0 && <p>No hay muebles para mostrar</p>}
 
       <div className="tarjetas-grid">
-        {filtrados.map((item) => (
+          {itemsPaginados.map((item) => (
           <TarjetaItem key={item.id} item={item} onEdit={abrirEdicion} />
-        ))}
+          ))}
       </div>
+
+      <div className="paginacion">
+    <button 
+      disabled={paginaActual === 1} 
+      onClick={() => setPaginaActual(paginaActual - 1)}
+      className="paginacion__btn"
+    >
+      Anterior
+    </button>
+        
+    <span className="paginacion__info">
+      Página {paginaActual} de {totalPaginas}
+    </span>
+        
+    <button 
+      disabled={paginaActual === totalPaginas || totalPaginas === 0} 
+      onClick={() => setPaginaActual(paginaActual + 1)}
+      className="paginacion__btn"
+    >
+      Siguiente
+    </button>
+  </div>
 
       <Modal
         open={nuevoModalOpen}
