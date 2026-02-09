@@ -28,6 +28,39 @@
   color: #61dafb;
 }
 
+
+.acciones-primarias {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0;
+  padding: 0 10px;
+}
+
+.boton-agregar {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.boton-agregar:hover {
+  background-color: #218838;
+  transform: translateY(-2px); /* Efecto de elevación */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.boton-agregar:active {
+  transform: translateY(0);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

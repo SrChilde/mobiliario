@@ -101,9 +101,13 @@ function Inicio() {
 
       <Buscador value={filtro} onChange={setFiltro} />
 
-      <button onClick={() => setNuevoModalOpen(true)} className="boton-agregar">
-         + Agregar Nuevo Mobiliario
-      </button>
+      <Buscador value={filtro} onChange={setFiltro} />
+
+      <div className="acciones-primarias">
+        <button onClick={() => setNuevoModalOpen(true)} className="boton-agregar">
+          <span>+</span> Agregar Nuevo Mobiliario
+        </button>
+      </div>
 
       {filtrados.length === 0 && <p>No hay muebles para mostrar</p>}
 
