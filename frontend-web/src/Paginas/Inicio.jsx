@@ -39,6 +39,9 @@ function Inicio() {
     cargar();
   }, []);
 
+
+  const [nuevoModalOpen, setNuevoModalOpen] = useState(false);
+
   const guardarMobiliario = async (payload) => {
     try {
       setGuardando(true);
@@ -53,6 +56,8 @@ function Inicio() {
       setGuardando(false);
     }
   };
+
+
 
   const abrirEdicion = (item) => {
     setSeleccionado(item);
@@ -96,7 +101,9 @@ function Inicio() {
 
       <Buscador value={filtro} onChange={setFiltro} />
 
-      <FormNuevo onGuardar={guardarMobiliario} loading={guardando} />
+      <button onClick={() => setNuevoModalOpen(true)} className="boton-agregar">
+         + Agregar Nuevo Mobiliario
+      </button>
 
       {filtrados.length === 0 && <p>No hay muebles para mostrar</p>}
 
@@ -105,6 +112,21 @@ function Inicio() {
           <TarjetaItem key={item.id} item={item} onEdit={abrirEdicion} />
         ))}
       </div>
+
+      <Modal
+        open={nuevoModalOpen}
+        title="Registrar Nuevo Mobiliario"
+        onClose={() => setNuevoModalOpen(false)}
+      >
+        <FormNuevo 
+          onGuardar={async (payload) => {
+            const ok = await guardarMobiliario(payload);
+            if (ok) setNuevoModalOpen(false);
+            return ok;
+          }} 
+          loading={guardando} 
+        />
+      </Modal>
 
       <Modal
         open={editOpen}
