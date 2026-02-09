@@ -25,19 +25,6 @@ function Inicio() {
   const [paginaActual, setPaginaActual] = useState(1);
   const itemsPorPagina = 6;
 
-  const filtrados = mobiliario.filter((item) =>
-    (item.codigo + " " + item.titulo + " " + item.descripcion)
-      .toLowerCase()
-      .includes(filtro.toLowerCase())
-  );
-
-  // 2. DESPUÉS definimos la lógica de paginación usando 'filtrados'
-  const totalPaginas = Math.ceil(filtrados.length / itemsPorPagina);
-  const indiceUltimoItem = paginaActual * itemsPorPagina;
-  const indicePrimerItem = indiceUltimoItem - itemsPorPagina;
-  
-  // Extraemos la porción de la lista para la página actual
-  const itemsPaginados = filtrados.slice(indicePrimerItem, indiceUltimoItem);
 
   // 3. AGREGAMOS este useEffect para resetear la página al buscar
   useEffect(() => {
@@ -105,6 +92,18 @@ function Inicio() {
 
 
   if (loading) return <Cargando />;
+
+
+  const filtrados = mobiliario.filter((item) =>
+  (item.codigo + " " + item.titulo + " " + item.descripcion)
+    .toLowerCase()
+    .includes(filtro.toLowerCase())
+  );  
+
+  const totalPaginas = Math.ceil(filtrados.length / itemsPorPagina);
+  const indiceUltimoItem = paginaActual * itemsPorPagina;
+  const indicePrimerItem = indiceUltimoItem - itemsPorPagina;
+  const itemsPaginados = filtrados.slice(indicePrimerItem, indiceUltimoItem);
 
   return (
     <div className="app-container">
